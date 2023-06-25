@@ -7,8 +7,10 @@ using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [FormerlySerializedAs("_MovementSpeed")]
     [Header("Movement Settings")]
-    [SerializeField] protected float _MovementSpeed;              // Speed the player object will move at
+    [SerializeField] protected float _GeneralMovementSpeed;              // Speed the player object will move at
+    [SerializeField] protected float _SandMovementSpeed;                 // Speed the player moves at when on sand
     [SerializeField] protected float _RotationSpeed;                // Speed at which the character will rotation at
     private Vector3 _PlayerMovementInput;                       // Reference to the current input
 
@@ -56,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (_PlayerMovementInput.normalized.magnitude > 0.1f)
         {
-            var finalMovement = _PlayerMovementInput * (_MovementSpeed * Time.fixedDeltaTime);          // Calculate final movement direction
+            var finalMovement = _PlayerMovementInput * (_GeneralMovementSpeed * Time.fixedDeltaTime);          // Calculate final movement direction
 
             Quaternion toRotation = Quaternion.LookRotation(finalMovement, Vector3.up);             // Get where we want to rotate the character t
             _Rbody.velocity = new Vector3(finalMovement.x, finalMovement.y, finalMovement.z);
