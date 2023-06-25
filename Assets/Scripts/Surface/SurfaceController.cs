@@ -44,7 +44,7 @@ public class SurfaceController : MonoBehaviour
                             player.OnSurface = ESurfaceType.REGULAR;
                         break;
                     case ESurfaceType.SAND:
-                        if(player.OnSurface == ESurfaceType.SAND):
+                        if(player.OnSurface == ESurfaceType.SAND)
                             player.OnSurface = ESurfaceType.REGULAR;
                         break;
                     default:
