@@ -5,14 +5,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    [FormerlySerializedAs("_MovementSpeed")]
     [Header("Movement Settings")]
     [SerializeField] protected float _GeneralMovementSpeed;              // Speed the player object will move at
     [SerializeField] protected float _SandMovementSpeed;                 // Speed the player moves at when on sand
     [SerializeField] protected float _RotationSpeed;                // Speed at which the character will rotation at
     private Vector3 _PlayerMovementInput;                       // Reference to the current input
+
+    [FormerlySerializedAs("_OnSurface")] [Header("Surface")] 
+    public ESurfaceType OnSurface;         // Reference to the surface we are currently on
 
     [Header("Player Inputs")] 
     [SerializeField] protected PlayerInput _Input;
