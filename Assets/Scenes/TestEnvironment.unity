@@ -1139,7 +1139,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -2238,6 +2238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1286567449}
   - component: {fileID: 1286567448}
+  - component: {fileID: 1286567450}
   m_Layer: 0
   m_Name: SandCollison
   m_TagString: Untagged
@@ -2281,6 +2282,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1286567450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286567447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6a15e38b9d7c4c49acfbeaef3fe4de7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _SurfaceType: 1
 --- !u!1 &1327844121
 GameObject:
   m_ObjectHideFlags: 0
@@ -3655,6 +3669,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 87631963491785701, guid: a58505a1b06201d4a833c8f067e81d09,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 505603425534041236, guid: a58505a1b06201d4a833c8f067e81d09,
+        type: 3}
+      propertyPath: _SandMovementSpeed
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 505603425534041236, guid: a58505a1b06201d4a833c8f067e81d09,
+        type: 3}
+      propertyPath: _GeneralMovementSpeed
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 5461039097185996010, guid: a58505a1b06201d4a833c8f067e81d09,
         type: 3}
       propertyPath: m_RootOrder
@@ -3713,6 +3742,11 @@ PrefabInstance:
     - target: {fileID: 5687248275200420445, guid: a58505a1b06201d4a833c8f067e81d09,
         type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687248275200420445, guid: a58505a1b06201d4a833c8f067e81d09,
+        type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8636280034833216396, guid: a58505a1b06201d4a833c8f067e81d09,
