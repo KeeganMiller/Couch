@@ -27,4 +27,31 @@ public class SurfaceController : MonoBehaviour
                 player.OnSurface = this._SurfaceType;
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerController player = other.GetComponent<PlayerController>();
+            if (player)
+            {
+                switch (_SurfaceType)
+                {
+                    case ESurfaceType.REGULAR:
+                        break;
+                    case ESurfaceType.ICE:
+                        if (player.OnSurface == ESurfaceType.ICE)
+                            player.OnSurface = ESurfaceType.REGULAR;
+                        break;
+                    case ESurfaceType.SAND:
+                        if(player.OnSurface == ESurfaceType.SAND):
+                            player.OnSurface = ESurfaceType.REGULAR;
+                        break;
+                    default:
+                        Debug.LogWarning("Failed to update surface");
+                        break;
+                }
+            }
+        }
+    }
 }
