@@ -49,6 +49,9 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
     }
 
+    /// <summary>
+    /// Controls the character movement
+    /// </summary>
     private void HandleMovement()
     {
         // Validate the rigidbody before handling movement
@@ -83,5 +86,7 @@ public class PlayerController : MonoBehaviour
 
         if (OnSurface == ESurfaceType.REGULAR || OnSurface == ESurfaceType.ICE)
             return _GeneralMovementSpeed;
+
+        return 0f;
     }
 }
