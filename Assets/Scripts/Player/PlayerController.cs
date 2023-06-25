@@ -36,6 +36,11 @@ public class PlayerController : MonoBehaviour
         _Input = new PlayerInput();
     }
 
+    protected virtual void Start()
+    {
+        SetSurfaceType(ESurfaceType.REGULAR);
+    }
+
     protected void OnEnable()
     {
         _Input.Enable();
