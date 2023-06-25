@@ -2,25 +2,29 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] protected float _MovementSpeed;              // Speed the player object will move at
     [SerializeField] protected float _RotationSpeed;                // Speed at which the character will rotation at
+    private Vector3 _PlayerMovementInput;                       // Reference to the current input
 
     [Header("Player Inputs")] 
     [SerializeField] protected PlayerInput _Input;
 
 
+    [FormerlySerializedAs("_CharController")]
     [Header("Components")] 
-    [SerializeField] protected CharacterController _CharController;                    // Reference to the Character Controller
+    [SerializeField] protected Rigidbody _Rbody;                    // Reference to the Character Controller
     
     protected virtual void Awake()
     {
         // Get reference to the character controller
-        if (!_CharController)
-            _CharController = this.GetComponent<CharacterController>();
+        if (!_Rbody)
+            _Rbody = this.GetComponent<Rigidbody>();
 
         _Input = new PlayerInput();
     }
@@ -28,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     protected void OnEnable()
     {
         _Input.Enable();
+
     }
 
     protected void OnDisable()
@@ -43,18 +48,18 @@ public class PlayerMovement : MonoBehaviour
     private void HandleMovement()
     {
         // Validate the rigidbody before handling movement
-        if (!_CharController)
+        if (!_Rbody)
             return;
 
         var movementInput = _Input.Player.Move.ReadValue<Vector2>();                    // Get the input value as vector 2
-        var movementValue = new Vector3(movementInput.x, 0f, movementInput.y);      // Create the movement value
+        _PlayerMovementInput = new Vector3(movementInput.x, 0f, movementInput.y);      // Create the movement value
 
-        if (movementValue.normalized.magnitude > 0.1f)
+        if (_PlayerMovementInput.normalized.magnitude > 0.1f)
         {
-            var finalMovement = movementValue * (_MovementSpeed * Time.deltaTime);          // Calculate final movement direction
-            _CharController.Move(finalMovement);                // Apply movement to the character controller
-            
-            Quaternion toRotation = Quaternion.LookRotation(finalMovement, Vector3.up);             // Get where we want to rotate the character to
+            var finalMovement = _PlayerMovementInput * (_MovementSpeed * Time.fixedDeltaTime);          // Calculate final movement direction
+
+            Quaternion toRotation = Quaternion.LookRotation(finalMovement, Vector3.up);             // Get where we want to rotate the character t
+            _Rbody.velocity = new Vector3(finalMovement.x, finalMovement.y, finalMovement.z);
             // Apply rotation smoothly
             transform.rotation =
                 Quaternion.RotateTowards(transform.rotation, toRotation, (_RotationSpeed * Time.deltaTime));
