@@ -1,17 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] protected float _MovementSpeed;              // Speed the player object will move at
+
+    [Header("Components")] 
+    [SerializeField] protected Rigidbody _RBody; 
+    
+    protected virtual void Awake()
     {
-        
+        if (!_RBody)
+            _RBody = this.GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected void FixedUpdate()
+    {
+        HandleMovement();
+    }
+
+    private void HandleMovement()
     {
         
     }
