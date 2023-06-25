@@ -11,10 +11,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected float _GeneralMovementSpeed;              // Speed the player object will move at
     [SerializeField] protected float _SandMovementSpeed;                 // Speed the player moves at when on sand
     [SerializeField] protected float _RotationSpeed;                // Speed at which the character will rotation at
+    [SerializeField] protected float _StandardDrag = 10f;
+    [SerializeField] protected float _IceDrag = 0f;
     private Vector3 _PlayerMovementInput;                       // Reference to the current input
-
-    [FormerlySerializedAs("_OnSurface")] [Header("Surface")] 
-    public ESurfaceType OnSurface;         // Reference to the surface we are currently on
+    
+    [Header("Surface")]
+    protected ESurfaceType _OnSurface;         // Reference to the surface we are currently on
+    public ESurfaceType OnSurface => _OnSurface;
 
     [Header("Player Inputs")] 
     [SerializeField] protected PlayerInput _Input;
@@ -88,5 +91,24 @@ public class PlayerController : MonoBehaviour
             return _GeneralMovementSpeed;
 
         return 0f;
+    }
+
+    /// <summary>
+    /// Sets the surface type & updates the drag
+    /// </summary>
+    /// <param name="type">Surface Type</param>
+    public void SetSurfaceType(ESurfaceType type)
+    {
+        _OnSurface = type;              // Set the surface type
+
+        // Update the drag
+        if (_OnSurface == ESurfaceType.ICE)
+        {
+            _Rbody.drag = _IceDrag;
+        }
+        else
+        {
+            _Rbody.drag = _StandardDrag;
+        }
     }
 }

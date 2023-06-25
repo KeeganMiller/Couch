@@ -24,7 +24,7 @@ public class SurfaceController : MonoBehaviour
             PlayerController player = other.GetComponent<PlayerController>();
             // Validate the player controller and set the On sourface property
             if (player)
-                player.OnSurface = this._SurfaceType;
+                player.SetSurfaceType(_SurfaceType);
         }
     }
 
@@ -41,11 +41,11 @@ public class SurfaceController : MonoBehaviour
                         break;
                     case ESurfaceType.ICE:
                         if (player.OnSurface == ESurfaceType.ICE)
-                            player.OnSurface = ESurfaceType.REGULAR;
+                            player.SetSurfaceType(ESurfaceType.REGULAR);
                         break;
                     case ESurfaceType.SAND:
                         if(player.OnSurface == ESurfaceType.SAND)
-                            player.OnSurface = ESurfaceType.REGULAR;
+                            player.SetSurfaceType(ESurfaceType.REGULAR);
                         break;
                     default:
                         Debug.LogWarning("Failed to update surface");
