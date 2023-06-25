@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
         if (_PlayerMovementInput.normalized.magnitude > 0.1f)
         {
-            var finalMovement = _PlayerMovementInput * (_GeneralMovementSpeed * Time.fixedDeltaTime);          // Calculate final movement direction
+            var finalMovement = _PlayerMovementInput * (GetMovementSpeed() * Time.fixedDeltaTime);          // Calculate final movement direction
 
             Quaternion toRotation = Quaternion.LookRotation(finalMovement, Vector3.up);             // Get where we want to rotate the character t
             _Rbody.velocity = new Vector3(finalMovement.x, finalMovement.y, finalMovement.z);
@@ -70,5 +70,18 @@ public class PlayerController : MonoBehaviour
         }
 
 
+    }
+
+    /// <summary>
+    /// Gets the target movement speed
+    /// </summary>
+    /// <returns>Movement speed</returns>
+    private float GetMovementSpeed()
+    {
+        if (OnSurface == ESurfaceType.SAND)
+            return _SandMovementSpeed;
+
+        if (OnSurface == ESurfaceType.REGULAR || OnSurface == ESurfaceType.ICE)
+            return _GeneralMovementSpeed;
     }
 }
