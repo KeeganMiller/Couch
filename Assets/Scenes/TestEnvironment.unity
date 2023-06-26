@@ -1011,7 +1011,7 @@ MonoBehaviour:
   - {fileID: 1577978723}
   _PlayerObject: {fileID: 5687248275200420445, guid: a58505a1b06201d4a833c8f067e81d09,
     type: 3}
-  _SpawnPlayers: 0
+  _SpawnPlayers: 2
 --- !u!4 &322522578
 Transform:
   m_ObjectHideFlags: 0
