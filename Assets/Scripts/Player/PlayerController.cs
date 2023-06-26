@@ -11,9 +11,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected float _GeneralMovementSpeed;              // Speed the player object will move at
     [SerializeField] protected float _SandMovementSpeed;                 // Speed the player moves at when on sand
     [SerializeField] protected float _IceMovementSpeed;                 // Speed the player will move at when on ice
-    [SerializeField] protected float _RotationSpeed;                // Speed at which the character will rotation at
-    [SerializeField] protected float _StandardDrag = 10f;
-    [SerializeField] protected float _IceDrag = 0f;
+    [SerializeField, Tooltip("Speed the character rotates in the movement direction")] 
+    protected float _RotationSpeed;                // Speed at which the character will rotation at
+    [SerializeField, Tooltip("How much the character drags when on standard material (The lower the more it slides")]
+    protected float _StandardDrag = 10f;
+    [SerializeField, Tooltip("How much the cahracter drags when on ice (The lower the more it slides)")] 
+    protected float _IceDrag = 0f;
     [SerializeField] private float _GeneralAcceleration = 75f;
     [SerializeField] private float _IceAcceleration = 20f;
     private Vector3 _PlayerMovementInput;                       // Reference to the current input
