@@ -32,8 +32,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < _SpawnPlayers; ++i)
-            AddPlayer();
+        AddPlayer();
     }
 
     public void AddPlayer()
