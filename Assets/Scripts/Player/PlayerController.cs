@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _IceAcceleration = 20f;
     private Vector3 _PlayerMovementInput;                       // Reference to the current input
 
+    [Header("Teleport Amount")] 
+    [SerializeField, Tooltip("Amount we move the character forward by")] private float _TeleportAmount;          
+    
+
     [Header("Surface")]
     protected ESurfaceType _OnSurface;         // Reference to the surface we are currently on
     public ESurfaceType OnSurface => _OnSurface;
@@ -95,6 +99,15 @@ public class PlayerController : MonoBehaviour
         }
 
 
+    }
+
+    public void OnTeleport(InputAction.CallbackContext ctx)
+    {
+        // Only perform event on button pressed down
+        if (!ctx.performed)
+            return;
+
+        this.transform.position += this.transform.TransformDirection(Vector3.forward) * _TeleportAmount;
     }
 
     /// <summary>
