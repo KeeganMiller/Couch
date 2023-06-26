@@ -287,7 +287,7 @@ MonoBehaviour:
   _IceMovementSpeed: 100
   _RotationSpeed: 500
   _StandardDrag: 20
-  _IceDrag: 3
+  _IceDrag: 4
   _GeneralAcceleration: 75
   _IceAcceleration: 20
   _TeleportAmount: 10
