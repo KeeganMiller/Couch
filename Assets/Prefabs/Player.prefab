@@ -268,9 +268,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _GeneralMovementSpeed: 275
   _SandMovementSpeed: 150
+  _IceMovementSpeed: 100
   _RotationSpeed: 500
   _StandardDrag: 20
-  _IceDrag: 5
+  _IceDrag: 3
   _GeneralAcceleration: 75
   _IceAcceleration: 20
   _Rbody: {fileID: 0}
