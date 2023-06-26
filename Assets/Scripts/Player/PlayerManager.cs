@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerManager : MonoBehaviour
 {
     [Header("In-Game Players")] 
-    [SerializeField] private List<PlayerInput> _Players = new List<PlayerInput>();              // Reference to the inputs of each player
+    [SerializeField] private List<GameObject> _Players = new List<GameObject>();              // Reference to the inputs of each player
     private const int MAX_PLAYERS = 4;                  // Define how many players can join a match
     private int _CurrentPlayerCount = 0;                // Reference to how many players are currently in the match
 
@@ -15,13 +15,12 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private List<Transform> _SpawnPoints = new List<Transform>();              // Reference to the spawn points
     [SerializeField] private List<LayerMask> _PlayerLayers = new List<LayerMask>();
 
-    [Header("Inputs")] 
-    [SerializeField] private PlayerInputManager _InputManager;
+    [Header("Prefabs")] 
+    [SerializeField] private GameObject _PlayerObject;
     
     private void Awake()
     {
-        if (!_InputManager)
-            _InputManager = FindObjectOfType<PlayerInputManager>();
+
     }
 
     private void OnEnable()
@@ -29,8 +28,15 @@ public class PlayerManager : MonoBehaviour
         
     }
 
-    public void AddPlayer(PlayerInput player)
+    public void AddPlayer(GameObject player)
     {
+        // Check that there is room for the player to join
+        if (_CurrentPlayerCount >= MAX_PLAYERS)
+        {
+            Debug.Log("#AddPlayer::PlayerManager - Lobby is full");
+            return;
+        }
+        
         
     }
 }
