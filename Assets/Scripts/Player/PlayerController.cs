@@ -20,7 +20,10 @@ public class PlayerController : MonoBehaviour
     public ESurfaceType OnSurface => _OnSurface;
 
     [Header("Player Inputs")] 
-    [SerializeField] protected PlayerInput _Input;
+    protected InputActionAsset _InputAsset;
+    protected InputActionMap _PlayerMap;
+    
+    
 
 
     [FormerlySerializedAs("_CharController")]
@@ -33,7 +36,9 @@ public class PlayerController : MonoBehaviour
         if (!_Rbody)
             _Rbody = this.GetComponent<Rigidbody>();
 
-        _Input = new PlayerInput();
+        _InputAsset = this.GetComponent<UnityEngine.InputSystem.PlayerInput>().actions;
+        _PlayerMap = _InputAsset.FindActionMap("Player");
+
     }
 
     protected virtual void Start()
@@ -43,13 +48,15 @@ public class PlayerController : MonoBehaviour
 
     protected void OnEnable()
     {
-        _Input.Enable();
+        if (_PlayerMap != null)
+            _PlayerMap.Enable();
 
     }
 
     protected void OnDisable()
     {
-        _Input.Disable();
+        if(_PlayerMap != null)
+            _PlayerMap.Disable();
     }
 
     protected void FixedUpdate()
@@ -66,7 +73,7 @@ public class PlayerController : MonoBehaviour
         if (!_Rbody)
             return;
 
-        var movementInput = _Input.Player.Move.ReadValue<Vector2>();                    // Get the input value as vector 2
+        var movementInput = _PlayerMap.FindAction("Move").ReadValue<Vector2>();
         _PlayerMovementInput = new Vector3(movementInput.x, 0f, movementInput.y);      // Create the movement value
 
         if (_PlayerMovementInput.normalized.magnitude > 0.1f)
