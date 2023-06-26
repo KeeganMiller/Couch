@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
+    public static PlayerManager Instance;                       // Instance reference
     [Header("In-Game Players")] 
     [SerializeField] private List<GameObject> _Players = new List<GameObject>();              // Reference to the inputs of each player
     private const int MAX_PLAYERS = 4;                  // Define how many players can join a match
@@ -16,16 +17,23 @@ public class PlayerManager : MonoBehaviour
 
     [Header("Prefabs")] 
     [SerializeField] private GameObject _PlayerObject;                  // Reference to the player prefab
+
+    [Header("Debug Spawning")] 
+    [SerializeField, Range(1, 4)] private int _SpawnPlayers;
     
     private void Awake()
     {
-        
+        // Create the instance
+        if (Instance == null)
+            Instance = this;
+        else 
+            Destroy(this.gameObject);
     }
 
     private void Start()
     {
-        AddPlayer();
-        AddPlayer();
+        for (int i = 0; i < _SpawnPlayers; ++i)
+            AddPlayer();
     }
 
     public void AddPlayer()
