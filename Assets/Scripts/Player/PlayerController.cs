@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] protected float _GeneralMovementSpeed;              // Speed the player object will move at
     [SerializeField] protected float _SandMovementSpeed;                 // Speed the player moves at when on sand
+    [SerializeField] protected float _IceMovementSpeed;                 // Speed the player will move at when on ice
     [SerializeField] protected float _RotationSpeed;                // Speed at which the character will rotation at
     [SerializeField] protected float _StandardDrag = 10f;
     [SerializeField] protected float _IceDrag = 0f;
@@ -102,8 +103,11 @@ public class PlayerController : MonoBehaviour
         if (OnSurface == ESurfaceType.SAND)
             return _SandMovementSpeed;
 
-        if (OnSurface == ESurfaceType.REGULAR || OnSurface == ESurfaceType.ICE)
+        if (OnSurface == ESurfaceType.REGULAR)
             return _GeneralMovementSpeed;
+
+        if (OnSurface == ESurfaceType.ICE)
+            return _IceMovementSpeed;
 
         return 0f;
     }
