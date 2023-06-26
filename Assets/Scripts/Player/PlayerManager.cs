@@ -13,17 +13,22 @@ public class PlayerManager : MonoBehaviour
 
     [Header("Spawn Points")] 
     [SerializeField] private List<Transform> _SpawnPoints = new List<Transform>();              // Reference to the spawn points
-    [SerializeField] private List<LayerMask> _PlayerLayers = new List<LayerMask>();
 
     [Header("Prefabs")] 
     [SerializeField] private GameObject _PlayerObject;                  // Reference to the player prefab
     
     private void Awake()
     {
-
+        
     }
 
-    public void AddPlayer(GameObject player)
+    private void Start()
+    {
+        AddPlayer();
+        AddPlayer();
+    }
+
+    public void AddPlayer()
     {
         // Check that there is room for the player to join
         if (_CurrentPlayerCount >= MAX_PLAYERS)
@@ -32,12 +37,14 @@ public class PlayerManager : MonoBehaviour
             return;
         }
 
-        GameObject spawnedPlayer = GameObject.Instantiate(_PlayerObject);
-        Transform spawnTransform = _SpawnPoints[_CurrentPlayerCount - 1];
-        if (spawnedPlayer && spawnTransform)
-        {
-            spawnedPlayer.transform.position = spawnTransform.position;
-        }
+        _CurrentPlayerCount += 1;                   // Increment the player count
 
+        // Spawn the player in the world
+        GameObject spawnedPlayer = GameObject.Instantiate(_PlayerObject);
+        // If player has spawned then set the position
+        if (spawnedPlayer)
+        {
+            spawnedPlayer.transform.position = _SpawnPoints[_CurrentPlayerCount - 1].position;
+        }
     }
 }
