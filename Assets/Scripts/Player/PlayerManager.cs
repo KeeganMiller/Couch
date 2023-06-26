@@ -16,16 +16,11 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private List<LayerMask> _PlayerLayers = new List<LayerMask>();
 
     [Header("Prefabs")] 
-    [SerializeField] private GameObject _PlayerObject;
+    [SerializeField] private GameObject _PlayerObject;                  // Reference to the player prefab
     
     private void Awake()
     {
 
-    }
-
-    private void OnEnable()
-    {
-        
     }
 
     public void AddPlayer(GameObject player)
@@ -36,7 +31,13 @@ public class PlayerManager : MonoBehaviour
             Debug.Log("#AddPlayer::PlayerManager - Lobby is full");
             return;
         }
-        
-        
+
+        GameObject spawnedPlayer = GameObject.Instantiate(_PlayerObject);
+        Transform spawnTransform = _SpawnPoints[_CurrentPlayerCount - 1];
+        if (spawnedPlayer && spawnTransform)
+        {
+            spawnedPlayer.transform.position = spawnTransform.position;
+        }
+
     }
 }
