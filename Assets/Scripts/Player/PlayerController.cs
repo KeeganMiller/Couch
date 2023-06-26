@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected float _RotationSpeed;                // Speed at which the character will rotation at
     [SerializeField] protected float _StandardDrag = 10f;
     [SerializeField] protected float _IceDrag = 0f;
+    [SerializeField] private float _GeneralAcceleration = 75f;
+    [SerializeField] private float _IceAcceleration = 20f;
     private Vector3 _PlayerMovementInput;                       // Reference to the current input
     
     [Header("Surface")]
@@ -84,7 +86,7 @@ public class PlayerController : MonoBehaviour
             _Rbody.velocity = new Vector3(finalMovement.x, finalMovement.y, finalMovement.z);
             // Apply rotation smoothly
             transform.rotation =
-                Quaternion.RotateTowards(transform.rotation, toRotation, (_RotationSpeed * Time.deltaTime));
+                Quaternion.RotateTowards(transform.rotation, toRotation, (_RotationSpeed * Time.fixedDeltaTime));
         }
 
 
