@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _GeneralAcceleration = 75f;
     [SerializeField] private float _IceAcceleration = 20f;
     private Vector3 _PlayerMovementInput;                       // Reference to the current input
-    
+
     [Header("Surface")]
     protected ESurfaceType _OnSurface;         // Reference to the surface we are currently on
     public ESurfaceType OnSurface => _OnSurface;
@@ -83,7 +83,8 @@ public class PlayerController : MonoBehaviour
             var finalMovement = _PlayerMovementInput * (GetMovementSpeed() * Time.fixedDeltaTime);          // Calculate final movement direction
 
             Quaternion toRotation = Quaternion.LookRotation(finalMovement, Vector3.up);             // Get where we want to rotate the character t
-            _Rbody.velocity = new Vector3(finalMovement.x, finalMovement.y, finalMovement.z);
+            //_Rbody.velocity = new Vector3(finalMovement.x, finalMovement.y, finalMovement.z);
+            _Rbody.AddForce(transform.forward * GetMovementSpeed());
             // Apply rotation smoothly
             transform.rotation =
                 Quaternion.RotateTowards(transform.rotation, toRotation, (_RotationSpeed * Time.fixedDeltaTime));
