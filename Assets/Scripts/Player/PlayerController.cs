@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
             Quaternion toRotation = Quaternion.LookRotation(finalMovement, Vector3.up);             // Get where we want to rotate the character t
             //_Rbody.velocity = new Vector3(finalMovement.x, finalMovement.y, finalMovement.z);
-            _Rbody.AddForce(transform.forward * GetMovementSpeed());
+            _Rbody.AddForce(transform.forward * GetMovementSpeed(), ForceMode.Acceleration);
             // Apply rotation smoothly
             transform.rotation =
                 Quaternion.RotateTowards(transform.rotation, toRotation, (_RotationSpeed * Time.fixedDeltaTime));
