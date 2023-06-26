@@ -266,11 +266,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e62edd6abeb6c24682f1830e90c36c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _GeneralMovementSpeed: 300
-  _SandMovementSpeed: 120
+  _GeneralMovementSpeed: 275
+  _SandMovementSpeed: 150
   _RotationSpeed: 500
   _StandardDrag: 20
-  _IceDrag: 0
+  _IceDrag: 5
+  _GeneralAcceleration: 75
+  _IceAcceleration: 20
   _Rbody: {fileID: 0}
 --- !u!54 &7770843838750708876
 Rigidbody:
